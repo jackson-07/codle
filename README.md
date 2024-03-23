@@ -38,10 +38,10 @@ In particular I am going to use JavaScript methods to manipulate the DOM to crea
 - Player should have the option to start a new game after completing or ending a game.
 - Player should have the option to select the length of the hidden word from a drop-down menu before starting the game, so they can choose between playing a 7-word or 9-word version based on my preference or skill level.
 
-### Design
+## Design
 
-![alt text](img/Wordle.png.jpg)
+![alt text](img/Wordle.png)
 
-## Wireframe
+### Wireframe
 
 ![alt text](<img/Wordle Wireframe.png>)
