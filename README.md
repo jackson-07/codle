@@ -40,8 +40,8 @@ In particular I am going to use JavaScript methods to manipulate the DOM to crea
 
 ## Design
 
-![design](img/Wordle.png)
+![design](img/wordle.png)
 
 ### Wireframe
 
-![wireframe](<img/Wordle Wireframe.png>)
+![wireframe](img/wordle-wireframe.png)

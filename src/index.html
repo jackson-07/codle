@@ -4,21 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Jackson Raymond">
+    <link rel="icon" type="image/x-icon" href="/img/wordle-favicon.jpg">
     <link rel="stylesheet" href="style.css">
     <script defer src="main.js"></script>
-    <title>Wordle</title>
+    <title>CODLE</title>
 </head>
 
 <body>
     <div id="container">
         <div id="game">
             <header>
-                <h1 class="title">WORDLE</h1>
+                <h1 class="title">CODLE</h1>
             </header>
 
             <div id="board-container">
                 <div id="board"></div>
             </div>
+
 
             <div id="keyboard-container">
                 <div class="keyboard-row">
@@ -57,11 +59,15 @@
                     <button data-key="m">m</button>
                     <button data-key="←" class="large-button">del</button>
                 </div>
+                <div class="instructions">
+                    <div class="instruction-buttons">
+                        <button id="make-board-button-3">3 Letters</button>
+                        <button id="make-board-button-5">5 Letters</button>
+                        <button id="make-board-button-7">7 Letters</button>
+                    </div>
+                </div>
             </div>
-
-
         </div>
-
     </div>
 </body>
 
