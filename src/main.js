@@ -3,6 +3,8 @@ window.onload = function() {
     renderBoard();
 }
 
+// board
+
 const boardElement = document.querySelector("#board")
 const selectDifficulty = document.querySelector(".make-board-button")
 const startBoard = document.querySelector("#start-board")
@@ -23,18 +25,20 @@ function renderBoard() {
     boardElement.innerHTML = "";
   
     board.forEach(function(row) {
-      const elementRow = document.createElement("div");
+      const elementRow = document.createElement("div")
       elementRow.classList.add("row");
       
       row.forEach(function(column) {
-        const tile = document.createElement("div");
+        const tile = document.createElement("div")
         tile.classList.add("tile");
         elementRow.append(tile);
       });
       
-      boardElement.append(elementRow);
+      boardElement.append(elementRow)
     });
 }
+
+// buttons
 
 function handleThree () {
     handleClick(3)
@@ -49,21 +53,47 @@ function handleSeven () {
 }
 
 function handleClick(wordLength) {
-    makeBoard(wordLength);
-    renderBoard();
+    makeBoard(wordLength)
+    renderBoard()
 }
 
 document.getElementById("make-board-button-3").addEventListener("click", handleThree)
 document.getElementById("make-board-button-5").addEventListener("click", handleFive)
 document.getElementById("make-board-button-7").addEventListener("click", handleSeven)
 
+// keyboard
+
 const keys = document.querySelectorAll(".keyboard-row button");
+const tiles = document.querySelectorAll(".tile")
 
-for (let i = 0; i < keys.length; i++) {
-    keys[i].onclick = function(event) {
-        const target = event.target;
-        const key = target.getAttribute("data-key");
-        console.log(key);
-    };
+const dataKeys = Array.from(keys).map(function(button) {
+    return button.getAttribute("data-key")
+});
+
+keys.forEach(function(button) {
+    button.addEventListener("click", function(event) {
+        const key = event.target.getAttribute("data-key")
+        const index = dataKeys.indexOf(key); 
+        if (dataKeys.includes(key)) {
+            updateTile(index, key)
+        console.log(key)
+        }
+    });
+});
+
+document.addEventListener("keydown", function(event) {
+    const pressedKey = event.key.toLowerCase()
+    const index = dataKeys.indexOf(pressedKey)
+    if (dataKeys.includes(pressedKey)) {
+        updateTile(dataKeys.indexOf(pressedKey), pressedKey)
+        alert(pressedKey)
+    }
+});
+
+// why is this not working?!? 
+
+function updateTile(index, key) {
+    if (index < tiles.length) {
+        tiles[index].textContent = key
+    }
 }
-

@@ -76,6 +76,7 @@ header {
 
 .keyboard-row button {
     font-family: monospace;
+    font-size: large;
     border: 0;
     padding: 0;
     height: 60px;
@@ -86,6 +87,17 @@ header {
     text-transform: uppercase;
     margin-right: 6px;
     border-radius: 4px;
+    flex-grow: 1;
+}
+
+/* why is this not working?!? */
+
+.keyboard-row button.large-button {
+    flex-grow: 1.5;
+}
+
+.spacer {
+    flex-grow: 0.5;
 }
 
 .instructions {
