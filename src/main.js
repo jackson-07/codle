@@ -22,7 +22,7 @@ function makeBoard(wordLength) {
 }
 
 function renderBoard() {
-    boardElement.innerHTML = "";
+    boardElement.innerHTML = ""
   
     board.forEach(function(row) {
       const elementRow = document.createElement("div")
@@ -30,8 +30,8 @@ function renderBoard() {
       
       row.forEach(function(column) {
         const tile = document.createElement("div")
-        tile.classList.add("tile");
-        elementRow.append(tile);
+        tile.classList.add("tile")
+        elementRow.append(tile)
       });
       
       boardElement.append(elementRow)
@@ -41,18 +41,16 @@ function renderBoard() {
 // buttons
 
 function gameRules() {
-    document.getElementById("gameModal").style.display = "block";
-}
-
-window.onclick = function(event) {
-    var modal = document.getElementById("gameModal");
-    if (event.target == modal) {
-        modal.style.display = "none";
+    document.getElementById("gameModal").style.display = "block"
+    window.onclick = function (event) {
+        const modal = document.getElementById("gameModal")
+        if (event.target == modal) {
+            modal.style.display = "none"
+        }
     }
-}
-
-document.getElementsByClassName("close")[0].onclick = function() {
-    document.getElementById("gameModal").style.display = "none";
+    document.getElementsByClassName("close")[0].onclick = function () {
+        document.getElementById("gameModal").style.display = "none"
+    }
 }
 
 function handleThree () {
