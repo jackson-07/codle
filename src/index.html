@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Jackson Raymond">
     <link rel="icon" type="image/x-icon" href="/img/wordle-favicon.jpg">
     <link rel="stylesheet" href="style.css">
-    <script defer src="main.js"></script>
+    <script type="module" defer src="main.js"></script>
     <title>CODLE</title>
 </head>
 
@@ -19,6 +20,31 @@
 
             <div id="board-container">
                 <div id="board"></div>
+                <div class="instructions">
+                    <div class="instruction-buttons">
+                        <button id="game-rules">Instructions</button>
+                        <div id="gameModal" class="modal">
+                            <div class="modal-content">
+                                <span class="close">&times;</span>
+                                <h2>Select 3, 5, or 7 Letter versions of Codle and enjoy!</h2>
+                                <br>
+                                <p>You will need to guess the secret word.</p>
+                                <br>
+                                <p>After each guess, the tiles will change:</p>
+                                <ul>
+                                    <br>
+                                    <li>Green tiles indicate correct letters in the correct position.</li>
+                                    <li>Yellow tiles indicate correct letters but in the wrong position.</li>
+                                    <li>Grey tiles indicate letters that are not present in the hidden word.</li>
+                                </ul>
+                                <br>
+                                </li>
+                                <p>You have 6 guesses to find the secret word correctly.</p>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
 
@@ -36,7 +62,6 @@
                     <button data-key="p">p</button>
                 </div>
                 <div class="keyboard-row">
-                    <div class="spacer"></div>
                     <button data-key="a">a</button>
                     <button data-key="s">s</button>
                     <button data-key="d">d</button>
@@ -46,10 +71,9 @@
                     <button data-key="j">j</button>
                     <button data-key="k">k</button>
                     <button data-key="l">l</button>
-                    <div class="spacer"></div>
                 </div>
                 <div class="keyboard-row">
-                    <button data-key="↵" class="large-button">enter</button>
+                    <button data-key="↵">enter</button>
                     <button data-key="z">z</button>
                     <button data-key="x">x</button>
                     <button data-key="c">c</button>
@@ -57,7 +81,7 @@
                     <button data-key="b">b</button>
                     <button data-key="n">n</button>
                     <button data-key="m">m</button>
-                    <button data-key="←" class="large-button">del</button>
+                    <button data-key="←">del</button>
                 </div>
 
                 <div class="instructions">
@@ -67,7 +91,7 @@
                         <button id="make-board-button-7">7 Letters</button>
                     </div>
                 </div>
-                
+
             </div>
         </div>
     </div>

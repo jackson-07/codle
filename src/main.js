@@ -1,6 +1,6 @@
 window.onload = function() {
-    makeBoard(5);
-    renderBoard();
+    makeBoard()
+    renderBoard()
 }
 
 // board
@@ -40,6 +40,21 @@ function renderBoard() {
 
 // buttons
 
+function gameRules() {
+    document.getElementById("gameModal").style.display = "block";
+}
+
+window.onclick = function(event) {
+    var modal = document.getElementById("gameModal");
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+document.getElementsByClassName("close")[0].onclick = function() {
+    document.getElementById("gameModal").style.display = "none";
+}
+
 function handleThree () {
     handleClick(3)
 }
@@ -57,6 +72,7 @@ function handleClick(wordLength) {
     renderBoard()
 }
 
+document.getElementById("game-rules").addEventListener("click", gameRules)
 document.getElementById("make-board-button-3").addEventListener("click", handleThree)
 document.getElementById("make-board-button-5").addEventListener("click", handleFive)
 document.getElementById("make-board-button-7").addEventListener("click", handleSeven)
@@ -76,12 +92,12 @@ keys.forEach(function(button) {
         const index = dataKeys.indexOf(key); 
         if (dataKeys.includes(key)) {
             updateTile(index, key)
-        console.log(key)
+        alert(key)
         }
     });
 });
 
-document.addEventListener("keydown", function(event) {
+document.addEventListener("keyup", function(event) {
     const pressedKey = event.key.toLowerCase()
     const index = dataKeys.indexOf(pressedKey)
     if (dataKeys.includes(pressedKey)) {
@@ -90,10 +106,59 @@ document.addEventListener("keydown", function(event) {
     }
 });
 
-// why is this not working?!? 
+// game logic
 
-function updateTile(index, key) {
-    if (index < tiles.length) {
-        tiles[index].textContent = key
+/*
+
+import {threeWords} from "./src/data/threeWords.js"
+import {fiveWords} from "./src/data/fiveWords.js"
+import {sevenWords} from "./src/data/sevenWords.js"
+
+const secretThree = threeWords
+const secretFive = fiveWords
+const secretSeven = sevenWords
+
+function secretWord() {
+    let randomIndex;
+    if (handleThree.checked) {
+        randomIndex = Math.floor(Math.random() * secretThree.length);
+    } else if (handleFive.checked) {
+        randomIndex = Math.floor(Math.random() * secretFive.length);
+    } else if (handleSeven.checked) {
+        randomIndex = Math.floor(Math.random() * secretSeven.length);
+    }
+
+    if (randomIndex !== undefined) {
+        let secret;
+        if (handleThree.checked) {
+            secret = secretThree[randomIndex];
+        } else if (handleFive.checked) {
+            secret = secretFive[randomIndex];
+        } else if (handleSeven.checked) {
+            secret = secretSeven[randomIndex];
+        }
+    }
+}
+
+*/
+
+let guessedWords = [[]]
+let availableSpace = 1
+let guessedWordCount = 0
+
+function getWordArray() {
+    const wordArray = guessedWords.length
+    return guessedWords[wordArray - 1]
+}
+
+function updateTile(letter) {
+    const currentWord = getWordArray()
+
+    if (currentWord && currentWord.length < 5) {
+        currentWord.push(letter)
+
+        const availableSpaceElement = document.getElementById(String(availableSpace))
+
+        availableSpaceElement.textContent = letter
     }
 }

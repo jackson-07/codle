@@ -76,7 +76,7 @@ header {
 
 .keyboard-row button {
     font-family: monospace;
-    font-size: large;
+    font-size: medium;
     border: 0;
     padding: 0;
     height: 60px;
@@ -87,17 +87,6 @@ header {
     text-transform: uppercase;
     margin-right: 6px;
     border-radius: 4px;
-    flex-grow: 1;
-}
-
-/* why is this not working?!? */
-
-.keyboard-row button.large-button {
-    flex-grow: 1.5;
-}
-
-.spacer {
-    flex-grow: 0.5;
 }
 
 .instructions {
@@ -110,14 +99,54 @@ header {
 
 .instructions button {
     font-family: monospace;
+    font-size: medium;
     border: 0;
     padding: 0;
-    height: 70px;
-    width: 70px;
+    height: 50px;
+    width: 100px;
     cursor: pointer;
     background-color: grey;
     color: white;
     text-transform: uppercase;
     margin-right: 6px;
     border-radius: 4px;
+}
+
+#game-rules {
+    height: 50px;
+    width: 120px;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #d2c8c8;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
 }
