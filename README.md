@@ -20,11 +20,9 @@ I like to play Wordle. I don’t like that I can only play once a day. So I woul
 
 ## Approach
 
-To start I am going to build a clone of the classic 5 letter word game Wordle. 
+My plan is to use functions to create `<div>` elements so the HTML markup doesn’t contain 3 different boards for each version of the game. This will hopefully allow for quick restarting of the game and increase replay-ability by tieing these functions to event handlers displayed as buttons on the screen. 
 
-So that I can scale the difficulty of the game I will make sure my functions are re-usable to accomodate a 5, 7 and 9 letter version of the game.
-
-In particular I am going to use JavaScript methods to manipulate the DOM to create `<div>` elements so the HTML markup doesn’t contain 3 different boards for each version of the game. 
+This will also be my first time using a modal instead of alerts or prompts, I intend to use one for the rules of the game. 
 
 ### User Stories
 
