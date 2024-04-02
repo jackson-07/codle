@@ -117,24 +117,17 @@ const secretFive = fiveWords
 const secretSeven = sevenWords
 
 function secretWord() {
-    let randomIndex;
+    let randomIndex
+    let secret
     if (handleThree.checked) {
-        randomIndex = Math.floor(Math.random() * secretThree.length);
+        randomIndex = Math.floor(Math.random() * secretThree.length)
+        secret = secretThree[randomIndex]
     } else if (handleFive.checked) {
-        randomIndex = Math.floor(Math.random() * secretFive.length);
+        randomIndex = Math.floor(Math.random() * secretFive.length)
+        secret = secretFive[randomIndex]
     } else if (handleSeven.checked) {
-        randomIndex = Math.floor(Math.random() * secretSeven.length);
-    }
-
-    if (randomIndex !== undefined) {
-        let secret;
-        if (handleThree.checked) {
-            secret = secretThree[randomIndex];
-        } else if (handleFive.checked) {
-            secret = secretFive[randomIndex];
-        } else if (handleSeven.checked) {
-            secret = secretSeven[randomIndex];
-        }
+        randomIndex = Math.floor(Math.random() * secretSeven.length)
+        secret = secretSeven[randomIndex]
     }
 }
 
