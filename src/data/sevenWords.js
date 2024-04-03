@@ -1,4 +1,4 @@
-const sevenWords = [
+export const sevenWords = [
   "abandon",
   "ability",
   "abolish",

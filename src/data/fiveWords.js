@@ -1,4 +1,4 @@
-const fiveWords = [
+export const fiveWords = [
     'which',
     'there',
     'their',

@@ -1,4 +1,4 @@
-const threeWords = [
+export const threeWords = [
     "age", "aim", "air", "and", "ant", "any", "ape", "apt", "arm", "art",
     "ask", "axe", "bad", "bag", "ban", "bat", "bay", "bed", "bee", "bet",
     "big", "bit", "bow", "box", "boy", "bud", "bug", "bus", "but", "buy",
