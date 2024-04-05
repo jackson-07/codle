@@ -34,7 +34,7 @@ This will also be my first time using a modal instead of alerts or prompts, I in
 - Player should receive a visual cue or indication when they’ve successfully guessed the entire word.
 - Player should be able to see that the game came to an end either when they correctly guess the word or when they exhausted a predetermined number of attempts.
 - Player should have the option to start a new game after completing or ending a game.
-- Player should have the option to select the length of the hidden word from a drop-down menu before starting the game, so they can choose between playing a 7-word or 9-word version based on my preference or skill level.
+- Player should have the option to select the length of the hidden word from a drop-down menu before starting the game, so they can choose between playing a 3-word or 7-word version based on my preference or skill level.
 
 ### Wireframe
 

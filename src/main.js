@@ -1,13 +1,36 @@
-window.onload = function() {
-    makeBoard(5)
-    renderBoard()
-    secretWord()
-}
+/* Variables */
 
-// board
+import {threeWords} from "./data/threeWords.js"
+import {fiveWords} from "./data/fiveWords.js"
+import {sevenWords} from "./data/sevenWords.js"
+
+const secretThree = threeWords
+const secretFive = fiveWords
+const secretSeven = sevenWords
 
 const boardElement = document.querySelector("#board")
+const keys = document.querySelectorAll(".keyboard-row button")
+const tiles = document.querySelectorAll(".tile")
+
+document.getElementById("game-rules").addEventListener("click", gameRules)
+document.getElementById("make-board-button-3").addEventListener("click", handleThree)
+document.getElementById("make-board-button-5").addEventListener("click", handleFive)
+document.getElementById("make-board-button-7").addEventListener("click", handleSeven)
+
+/* State */
+
 let board = []
+let guessedWords = [[]]
+let rowIndex = 0
+const secret = secretWord(5)
+const currentWord = guessedWords[guessedWords.length - 1]
+const notWord = !threeWords.includes(currentWord.join("")) && !fiveWords.includes(currentWord.join("")) && !sevenWords.includes(currentWord.join(""))
+
+// const startRowIndex = id 0-0 ????
+
+/* Functions */
+
+// board
 
 function makeBoard(wordLength) {
     board = []
@@ -32,17 +55,18 @@ function renderBoard() {
         tile.classList.add("tile")
         tile.id = rowIndex + "-" + columnIndex
         elementRow.append(tile)
-        if (rowIndex === 0 && columnIndex === guessedWordCount) {
+        if (rowIndex === 0 && columnIndex === guessedWords) {
             tile.textContent = ""
         }
 
       });
-      
       boardElement.append(elementRow)
     });
 }
 
 // buttons
+
+// modal
 
 function gameRules() {
     document.getElementById("gameModal").style.display = "block"
@@ -57,69 +81,7 @@ function gameRules() {
     }
 }
 
-function handleThree () {
-    handleClick(3)
-    secretWord(3)
-}
-
-function handleFive () {
-    handleClick(5)
-    secretWord(5)
-}
-
-function handleSeven () {
-    handleClick(7)
-    secretWord(7)
-}
-
-function handleClick(wordLength) {
-    makeBoard(wordLength)
-    renderBoard()
-}
-
-document.getElementById("game-rules").addEventListener("click", gameRules)
-document.getElementById("make-board-button-3").addEventListener("click", handleThree)
-document.getElementById("make-board-button-5").addEventListener("click", handleFive)
-document.getElementById("make-board-button-7").addEventListener("click", handleSeven)
-
-// keyboard
-
-const keys = document.querySelectorAll(".keyboard-row button");
-const tiles = document.querySelectorAll(".tile")
-
-const dataKeys = Array.from(keys).map(function(button) {
-    return button.getAttribute("data-key")
-});
-
-keys.forEach(function(button) {
-    button.addEventListener("click", function(event) {
-        const key = event.target.getAttribute("data-key")
-        const index = dataKeys.indexOf(key); 
-        if (dataKeys.includes(key)) {
-            updateTile(key)
-        console.log(key)
-        }
-    });
-});
-
-document.addEventListener("keyup", function(event) {
-    const pressedKey = event.key.toLowerCase()
-    const index = dataKeys.indexOf(pressedKey)
-    if (dataKeys.includes(pressedKey)) {
-        updateTile(pressedKey)
-        console.log(pressedKey)
-    }
-});
-
-// game logic
-
-import {threeWords} from "./data/threeWords.js"
-import {fiveWords} from "./data/fiveWords.js"
-import {sevenWords} from "./data/sevenWords.js"
-
-const secretThree = threeWords
-const secretFive = fiveWords
-const secretSeven = sevenWords
+// retrieve secret word
 
 function secretWord(wordLength) {
     let randomIndex
@@ -137,37 +99,120 @@ function secretWord(wordLength) {
         secret = secretSeven[randomIndex]
         console.log(secret)
     }
+    return secret
 }
 
-let guessedWords = [[]]
-let guessedWordCount = 0
+// start game 
+
+function startGame(wordLength) {
+    makeBoard(wordLength)
+    renderBoard()
+
+}
+
+function handleThree () {
+    startGame(3)
+    secretWord(3)
+}
+
+function handleFive () {
+    startGame(5)
+    secretWord(5)
+}
+
+function handleSeven () {
+    startGame(7)
+    secretWord(7)
+}
+
+// keyboard
+
+const dataKeys = Array.from(keys).map(function(button) {
+    return button.getAttribute("data-key")
+})
+
+keys.forEach(function(button) {
+    button.addEventListener("click", function(event) {
+        const key = event.target.getAttribute("data-key")
+        const index = dataKeys.indexOf(key); 
+        if (dataKeys.includes(key)) {
+            updateTile(key)
+        }
+    })
+})
+
+// display on the grid
 
 function updateTile(letter) {
     const currentWord = guessedWords[guessedWords.length - 1]
     if (currentWord && currentWord.length <= 5) {
-        const rowIndex = guessedWordCount
-        const columnIndex = currentWord.length
-        const tileId = `${rowIndex}-${columnIndex}`
-        const tile = document.getElementById(tileId)
-        if (tile) {
+
+        if (letter === "←" && guessedWords.length > 0) {
+            const columnIndex = currentWord.length - 1
+            const tileId = `${rowIndex}-${columnIndex}`
+            const tile = document.getElementById(tileId)
+            currentWord.pop()       
+            tile.textContent = ""
+        }
+        else if (letter === "↵" && currentWord.length === 5) {
+            submitWord(5)
+            guessedWords.push([])
+            rowIndex++
+            
+        }
+
+        else {
+            const columnIndex = currentWord.length
+            const tileId = `${rowIndex}-${columnIndex}`
+            const tile = document.getElementById(tileId)
             tile.textContent = letter
             currentWord.push(letter)
-        }
-        if (letter === "↵" && columnIndex === 5) {
-            guessedWords.push([])
-            guessedWordCount++
-        }
-        if (letter === "←" && guessedWords.length > 0) {
-            guessedWords.pop([])
         }
     }
 }
 
+// submit a word to guess
+
+function submitWord() {
+    const currentWord = guessedWords[guessedWords.length - 1]
+    /*
+    if (notWord) {
+        alert("That is not a word!")
+        return
+    }
+    */
+    
+    if (currentWord.join("") === secret) {
+        alert("Congratulations, you won!")
+    }
+    
+    for (let i = 0; i < currentWord.length; i++) {
+        const letter = currentWord[i];
+        const tileId = `${rowIndex}-${i}`
+        const tile = document.getElementById(tileId)
+        
+        if (secret.includes(letter)) {
+            const position = secret.indexOf(letter)
+            if (position === i) {
+                tile.style.backgroundColor = "rgb(83, 141, 78)"
+            } else {
+                tile.style.backgroundColor = "rgb(181, 159, 59)"
+            }
+        } else {
+            tile.style.backgroundColor = "rgb(58, 58, 60)"
+
+        }
+    }
+}
+
+window.onload = function() {
+    makeBoard(5)
+    renderBoard()
+}
+
 /*
 TODO LIST:
-- add submit word function with english word catcher
-- add tilecolor function for divs and keyboards
-- add alert or modal for winning or losing
-- add game reset to handleclick functions
-- clean the code
+- add notWord to submitWord
+- add reset to renderBoard function
+- add alert or modal for winning and losing
 */
