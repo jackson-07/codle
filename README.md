@@ -39,3 +39,7 @@ This will also be my first time using a modal instead of alerts or prompts, I in
 ### Wireframe
 
 ![wireframe](img/wordle-wireframe.png)
+
+### Screenshot
+
+![screenshot](img/Codle-Screenshot.png)

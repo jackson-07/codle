@@ -1,8 +1,8 @@
 /* Variables */
 
-import {threeWords} from "./data/threeWords.js"
-import {fiveWords} from "./data/fiveWords.js"
-import {sevenWords} from "./data/sevenWords.js"
+import { threeWords } from "./data/threeWords.js"
+import { fiveWords } from "./data/fiveWords.js"
+import { sevenWords } from "./data/sevenWords.js"
 
 const secretThree = threeWords
 const secretFive = fiveWords
@@ -23,10 +23,6 @@ let board = []
 let guessedWords = [[]]
 let rowIndex = 0
 const secret = secretWord(5)
-const currentWord = guessedWords[guessedWords.length - 1]
-const notWord = !threeWords.includes(currentWord.join("")) && !fiveWords.includes(currentWord.join("")) && !sevenWords.includes(currentWord.join(""))
-
-// const startRowIndex = id 0-0 ????
 
 /* Functions */
 
@@ -37,31 +33,33 @@ function makeBoard(wordLength) {
     for (let rowIndex = 0; rowIndex < 6; rowIndex++) {
         const row = []
         for (let i = 0; i < wordLength; i++) {
-          row.push("")
+            row.push("")
         }
         board.push(row)
-      }
+    }
 }
 
 function renderBoard() {
     boardElement.innerHTML = ""
-  
-    board.forEach(function(row, rowIndex) {
-      const elementRow = document.createElement("div")
-      elementRow.classList.add("row");
-      
-      row.forEach(function(column, columnIndex) {
-        const tile = document.createElement("div")
-        tile.classList.add("tile")
-        tile.id = rowIndex + "-" + columnIndex
-        elementRow.append(tile)
-        if (rowIndex === 0 && columnIndex === guessedWords) {
-            tile.textContent = ""
-        }
 
-      });
-      boardElement.append(elementRow)
-    });
+    board.forEach(function (row, rowIndex) {
+        const elementRow = document.createElement("div")
+        elementRow.classList.add("row");
+
+        row.forEach(function (column, columnIndex) {
+            const tile = document.createElement("div")
+            tile.classList.add("tile")
+            tile.id = rowIndex + "-" + columnIndex
+            elementRow.append(tile)
+            if (rowIndex === 0 && columnIndex === guessedWords) {
+                tile.textContent = ""
+            }
+
+        })
+
+        boardElement.append(elementRow)
+
+    })
 }
 
 // buttons
@@ -110,31 +108,31 @@ function startGame(wordLength) {
 
 }
 
-function handleThree () {
+function handleThree() {
     startGame(3)
     secretWord(3)
 }
 
-function handleFive () {
+function handleFive() {
     startGame(5)
     secretWord(5)
 }
 
-function handleSeven () {
+function handleSeven() {
     startGame(7)
     secretWord(7)
 }
 
 // keyboard
 
-const dataKeys = Array.from(keys).map(function(button) {
+const dataKeys = Array.from(keys).map(function (button) {
     return button.getAttribute("data-key")
 })
 
-keys.forEach(function(button) {
-    button.addEventListener("click", function(event) {
+keys.forEach(function (button) {
+    button.addEventListener("click", function (event) {
         const key = event.target.getAttribute("data-key")
-        const index = dataKeys.indexOf(key); 
+        const index = dataKeys.indexOf(key)
         if (dataKeys.includes(key)) {
             updateTile(key)
         }
@@ -145,23 +143,29 @@ keys.forEach(function(button) {
 
 function updateTile(letter) {
     const currentWord = guessedWords[guessedWords.length - 1]
-    if (currentWord && currentWord.length <= 5) {
 
+    console.log(currentWord)
+
+    if (currentWord && currentWord.length <= 5) {
+        console.log("branch1")
         if (letter === "←" && guessedWords.length > 0) {
+            console.log("branch1b")
             const columnIndex = currentWord.length - 1
             const tileId = `${rowIndex}-${columnIndex}`
             const tile = document.getElementById(tileId)
-            currentWord.pop()       
+            currentWord.pop()
             tile.textContent = ""
         }
+
         else if (letter === "↵" && currentWord.length === 5) {
+            console.log("branch2")
             submitWord(5)
             guessedWords.push([])
             rowIndex++
-            
         }
 
         else {
+            console.log("branch3")
             const columnIndex = currentWord.length
             const tileId = `${rowIndex}-${columnIndex}`
             const tile = document.getElementById(tileId)
@@ -175,22 +179,22 @@ function updateTile(letter) {
 
 function submitWord() {
     const currentWord = guessedWords[guessedWords.length - 1]
-    /*
+
+    const notWord = !threeWords.includes(currentWord.join("")) && !fiveWords.includes(currentWord.join("")) && !sevenWords.includes(currentWord.join(""))
     if (notWord) {
         alert("That is not a word!")
-        return
     }
-    */
-    
+
     if (currentWord.join("") === secret) {
         alert("Congratulations, you won!")
+
     }
-    
+    console.log(currentWord)
     for (let i = 0; i < currentWord.length; i++) {
-        const letter = currentWord[i];
+        const letter = currentWord[i]
         const tileId = `${rowIndex}-${i}`
         const tile = document.getElementById(tileId)
-        
+        console.log(letter, tile, tileId)
         if (secret.includes(letter)) {
             const position = secret.indexOf(letter)
             if (position === i) {
@@ -205,14 +209,14 @@ function submitWord() {
     }
 }
 
-window.onload = function() {
+window.onload = function () {
     makeBoard(5)
     renderBoard()
 }
 
 /*
 TODO LIST:
-- add notWord to submitWord
-- add reset to renderBoard function
-- add alert or modal for winning and losing
+- add end of game at end of guesses
+- add reset to startGame function
+- add modal for winning and losing
 */
