@@ -4,7 +4,7 @@ Build a game of your choice using HTML, CSS and JavaScript.
 
 ## Context
 
-I like to play Wordle. I don’t like that I can only play once a day. So I would like to create a clone that will remove the once per day limit and provide more game  difficulty options for replay-ability.
+I like to play Wordle. I don’t like that I can only play once a day. So I would like to create a clone that will remove the once per day limit for replay-ability.
 
 ### Game Rules
 
@@ -18,12 +18,6 @@ I like to play Wordle. I don’t like that I can only play once a day. So I woul
 - The player has a limited number of attempts (usually six) to guess the hidden word correctly.
 - The game ends when the player correctly guesses the hidden word or exhausts all attempts.
 
-## Approach
-
-My plan is to use functions to create `<div>` elements so the HTML markup doesn’t contain 3 different boards for each version of the game. This will hopefully allow for quick restarting of the game and increase replay-ability by tieing these functions to event handlers displayed as buttons on the screen. 
-
-This will also be my first time using a modal instead of alerts or prompts, I intend to use one for the rules of the game. 
-
 ### User Stories
 
 - Player should be able to start a new game.
@@ -34,7 +28,6 @@ This will also be my first time using a modal instead of alerts or prompts, I in
 - Player should receive a visual cue or indication when they’ve successfully guessed the entire word.
 - Player should be able to see that the game came to an end either when they correctly guess the word or when they exhausted a predetermined number of attempts.
 - Player should have the option to start a new game after completing or ending a game.
-- Player should have the option to select the length of the hidden word from a drop-down menu before starting the game, so they can choose between playing a 3-word or 7-word version based on my preference or skill level.
 
 ### Wireframe
 
@@ -42,4 +35,10 @@ This will also be my first time using a modal instead of alerts or prompts, I in
 
 ### Screenshot
 
-![screenshot](img/Codle-Screenshot.png)
+![screenshot](<img/Codle Screenshot2.png>)
+
+### Roadmap
+
+- Add functional keyboard to the game with tile colour display
+- For scalability I can consider using [WordAPI](https://www.wordsapi.com/) which can generate up to 2,500 requests per Day
+- Implementation of AI and blockchain because why not?

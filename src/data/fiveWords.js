@@ -1,4 +1,5 @@
 export const fiveWords = [
+    'debug',
     'which',
     'there',
     'their',
