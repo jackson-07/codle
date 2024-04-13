@@ -147,7 +147,7 @@ for (let i = 0; i < keys.length; i++) {
     keys[i].onclick = function (event) {
         const letter = event.target.getAttribute("data-key")
         handleKeys(letter)
-    };
+    }
 }
 
 function getCurrentWordArray() {
