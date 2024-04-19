@@ -39,6 +39,16 @@ function checkWord(word) {
 
 document.getElementById("game-rules").addEventListener("click", gameRules)
 
+const modal = document.getElementById("alertModal")
+const modalContent = modal.querySelector(".modal-content")
+const closeButton = modalContent.querySelector(".close")
+
+function closeGameRules() {
+    document.getElementsByClassName("close")[0].onclick = function () {
+        document.getElementById("gameModal").style.display = "none"
+    }
+}
+
 function gameRules() {
     document.getElementById("gameModal").style.display = "block"
     window.onclick = function (event) {
@@ -47,9 +57,25 @@ function gameRules() {
             modal.style.display = "none"
         }
     }
-    document.getElementsByClassName("close")[0].onclick = function () {
-        document.getElementById("gameModal").style.display = "none"
-    }
+
+    closeGameRules()
+
+}
+
+function closeModal () {
+    modal.style.display = "none"
+}
+
+function alertModal(message) {
+    modalContent.textContent = message
+    modal.style.display = "block"
+    closeButton.addEventListener("click", closeModal)
+
+    window.addEventListener("click", function (event) {
+        if (event.target === modal) {
+            closeModal()
+        }
+    })
 }
 
 function createSquares() {
@@ -101,14 +127,14 @@ function gameOver() {
 function submitWord() {
     const currentWordArr = getCurrentWordArray()
     if (currentWordArr.length !== 5) {
-        alert("The word must be 5 letters!")
+        alertModal("The word must be 5 letters!")
         return
     }
 
     const currentWord = currentWordArr.join("")
 
     if (!checkWord(currentWord)) {
-        alert("That is not a word!")
+        alertModal("That is not a word!")
         return
     }
 
@@ -117,13 +143,13 @@ function submitWord() {
     guessedWordCount += 1
 
     if (currentWord === word) {
-        alert(`Congratulations! The word is ${word}.`)
+        alertModal(`Congratulations! The word is ${word}.`)
         gameOver()
         return
     }
 
     if (guessedWords.length === 6) {
-        alert(`Sorry, you have no more guesses! The word is ${word}.`)
+        alertModal(`Sorry, you have no more guesses! The word is ${word}.`);
         gameOver()
         return
     }
