@@ -65,7 +65,7 @@ header {
     justify-content: center;
     width: 100%;
     margin: 2px;
-
+    touch-action: manipulation;
 }
 
 .keyboard-row button {
@@ -80,6 +80,7 @@ header {
     margin: 2px;
     border-radius: 4px;
     flex-grow: 1;
+    user-select: none;
 }
 
 
